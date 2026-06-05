@@ -3,36 +3,36 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CMO Curriculum JSON Extractor</title>
+    <title>Visual Curriculum JSON Extractor</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="topbar">
       <div class="brand">
-        <span class="brand-mark">JS</span>
-        <span>Curriculum Extractor</span>
+        <span class="brand-mark">V2</span>
+        <span>Visual Curriculum Extractor</span>
       </div>
       <nav class="nav-actions" aria-label="Page actions">
-        <button class="ghost-button" id="loadSampleButton" type="button">Load sample text</button>
+        <a class="ghost-button" href="index.html">Classic parser</a>
       </nav>
     </header>
 
     <main class="shell">
       <section class="intro">
-        <p class="eyebrow">CMO25s.2015-BSIS</p>
-        <h1>Extract curriculum tables from PDF to structured JSON.</h1>
+        <p class="eyebrow">Coordinate parser</p>
+        <h1>Extract curriculum rows by table position.</h1>
         <p>
-          Upload the BSIS curriculum evaluation PDF or paste extracted text. The app detects years,
-          semesters, courses, units, and prerequisites, then formats the result into the schema you need.
+          This version reads PDF text by visual columns instead of relying on reconstructed lines,
+          reducing merged descriptions and missing wrapped subjects.
         </p>
       </section>
 
-      <section class="workspace" aria-label="Extractor workspace">
+      <section class="workspace" aria-label="Visual extractor workspace">
         <article class="panel input-panel">
           <div class="panel-head">
             <div>
               <p class="eyebrow">Input</p>
-              <h2>PDF or text source</h2>
+              <h2>PDF source</h2>
             </div>
             <span class="status-pill" id="statusPill">Idle</span>
           </div>
@@ -40,15 +40,15 @@
           <label class="dropzone" for="pdfInput" id="dropzone">
             <input id="pdfInput" type="file" accept="application/pdf">
             <span class="drop-icon">PDF</span>
-            <strong>Drop a PDF here or browse</strong>
-            <small>Client-side extraction only. No upload leaves your browser.</small>
+            <strong>Drop a curriculum PDF here or browse</strong>
+            <small>Uses PDF.js coordinates and stays client-side.</small>
           </label>
 
-          <label class="field-label" for="rawText">Extracted text</label>
-          <textarea id="rawText" spellcheck="false" placeholder="PDF text will appear here. You can also paste table text manually."></textarea>
+          <label class="field-label" for="rawText">Diagnostics</label>
+          <textarea id="rawText" spellcheck="false" placeholder="Extraction diagnostics and warnings will appear here."></textarea>
 
           <div class="button-row">
-            <button class="primary-button" id="extractButton" type="button">Extract JSON</button>
+            <button class="primary-button" id="extractButton" type="button" disabled>Extract JSON</button>
             <button class="ghost-button" id="clearButton" type="button">Clear</button>
           </div>
         </article>
@@ -79,10 +79,10 @@
 
           <pre class="code-view"><code id="jsonOutput">{
   "metadata": {
-    "curriculum": "CMO25s.2015-BSIS",
-    "total_units_required": 152,
+    "curriculum": "",
+    "total_units_required": 0,
     "scraping_date": "",
-    "filename": "CMO25s.2015-BSIS.json"
+    "filename": ""
   },
   "curriculum": []
 }</code></pre>
@@ -94,27 +94,6 @@
       </section>
     </main>
 
-    <template id="sampleText">
-CMO25s.2015-BSIS
-Total Units   Required: 152     |   Earned: 152
-1st Year
-  1st Semester        Earned:       26    Credited:       0
-  Code                Description                                                                Units        Cut-off   Pre-requisites   Grade   Credit   Status
-  GE 3                MATHEMATICS IN THE MODERN WORLD                                              3             3.0                      1.6      3      Enrolled
-  GE 4                PURPOSIVE COMMUNICATION/MALAYUNING                                           3             3.0                      1.5      3      Enrolled
-                      KOMUNIKASYON
-  CC 101              Introduction to Computing                                                    3             3.0                      1.2      3      Enrolled
-  CC 102              Computer Programming 1                                                       3             3.0                      1.5      3      Enrolled
-  2nd Semester        Earned:       26    Credited:       0
-  Code                Description                                                                Units        Cut-off   Pre-requisites   Grade   Credit   Status
-  CC 103              Computer Programming 2                                                       3             3.0       CC 102         1.1      3      Enrolled
-  IS 103              IT Infrastructure and Network Technologies                                   3             3.0       CC 101         1.1      3      Enrolled
-2nd Year
-  1st Semester        Earned:       26    Credited:       0
-  Code                Description                                                                Units        Cut-off   Pre-requisites   Grade   Credit   Status
-  CC 104              Data Structure and Algorithms                                                3             3.0       CC 103         2.0      3      Enrolled
-    </template>
-
-    <script src="app.js?v=20260519-1235" type="module"></script>
+    <script src="app2.js?v=20260519-visual3" type="module"></script>
   </body>
 </html>
