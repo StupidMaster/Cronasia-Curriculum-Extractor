@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visual Curriculum JSON Extractor</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">V2</span>
+        <span>Visual Curriculum Extractor</span>
+      </div>
+      <nav class="nav-actions" aria-label="Page actions">
+        <a class="ghost-button" href="index.html">Classic parser</a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="intro">
+        <p class="eyebrow">Coordinate parser</p>
+        <h1>Extract curriculum rows by table position.</h1>
+        <p>
+          This version reads PDF text by visual columns instead of relying on reconstructed lines,
+          reducing merged descriptions and missing wrapped subjects.
+        </p>
+      </section>
+
+      <section class="workspace" aria-label="Visual extractor workspace">
+        <article class="panel input-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Input</p>
+              <h2>PDF source</h2>
+            </div>
+            <span class="status-pill" id="statusPill">Idle</span>
+          </div>
+
+          <label class="dropzone" for="pdfInput" id="dropzone">
+            <input id="pdfInput" type="file" accept="application/pdf">
+            <span class="drop-icon">PDF</span>
+            <strong>Drop a curriculum PDF here or browse</strong>
+            <small>Uses PDF.js coordinates and stays client-side.</small>
+          </label>
+
+          <label class="field-label" for="rawText">Diagnostics</label>
+          <textarea id="rawText" spellcheck="false" placeholder="Extraction diagnostics and warnings will appear here."></textarea>
+
+          <div class="button-row">
+            <button class="primary-button" id="extractButton" type="button" disabled>Extract JSON</button>
+            <button class="ghost-button" id="clearButton" type="button">Clear</button>
+          </div>
+        </article>
+
+        <article class="panel output-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Output</p>
+              <h2>Structured JSON</h2>
+            </div>
+            <button class="ghost-button" id="copyButton" type="button" disabled>Copy</button>
+          </div>
+
+          <div class="stats-grid" aria-label="Extraction summary">
+            <div>
+              <span id="courseCount">0</span>
+              <small>Courses</small>
+            </div>
+            <div>
+              <span id="unitCount">0</span>
+              <small>Units</small>
+            </div>
+            <div>
+              <span id="termCount">0</span>
+              <small>Terms</small>
+            </div>
+          </div>
+
+          <pre class="code-view"><code id="jsonOutput">{
+  "metadata": {
+    "curriculum": "",
+    "total_units_required": 0,
+    "scraping_date": "",
+    "filename": ""
+  },
+  "curriculum": []
+}</code></pre>
+
+          <div class="output-actions">
+            <button class="primary-button" id="downloadButton" type="button" disabled>Download JSON</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="app2.js?v=20260519-visual3" type="module"></script>
+  </body>
+</html>
